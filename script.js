@@ -1,62 +1,37 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f4f8;
-  margin: 0;
-  padding: 20px;
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const eventSelect = document.getElementById('event');
+  const ticketInput = document.getElementById('tickets');
+  const totalDisplay = document.getElementById('total');
+  const bookingForm = document.getElementById('bookingForm');
+  const confirmationDiv = document.getElementById('confirmation');
 
-.container {
-  max-width: 500px;
-  margin: auto;
-  background-color: #ffffff;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
+  function updateTotal() {
+    const price = parseFloat(eventSelect.selectedOptions[0].getAttribute('data-price'));
+    const ticketCount = parseInt(ticketInput.value, 10) || 1;
+    totalDisplay.textContent = (price * ticketCount).toFixed(2);
+  }
 
-h1 {
-  text-align: center;
-  color: #1a73e8;
-}
+  eventSelect.addEventListener('change', updateTotal);
+  ticketInput.addEventListener('input', updateTotal);
 
-label {
-  font-weight: bold;
-  margin-top: 10px;
-  display: block;
-}
+  bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-select,
-input[type="number"] {
-  width: 100%;
-  padding: 8px;
-  margin: 5px 0 15px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
+    const selectedRoute = eventSelect.options[eventSelect.selectedIndex].text;
+    const ticketCount = parseInt(ticketInput.value, 10);
+    const total = totalDisplay.textContent;
 
-button {
-  background-color: #1a73e8;
-  color: white;
-  padding: 12px;
-  width: 100%;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-}
+    confirmationDiv.classList.remove('d-none');
+    confirmationDiv.innerHTML = `
+      <strong>Booking Confirmed!</strong><br>
+      You booked <strong>${ticketCount}</strong> ticket(s) for <strong>${selectedRoute}</strong>.<br>
+      Total Paid: ₹<strong>${total}</strong><br>
+      Thank you for choosing <strong>NR TRAVELS</strong>!
+    `;
 
-button:hover {
-  background-color: #125ac4;
-}
+    bookingForm.reset();
+    updateTotal();
+  });
 
-#confirmation {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #e6ffe6;
-  border: 1px solid #88cc88;
-  border-radius: 5px;
-}
-
-.hidden {
-  display: none;
-}
+  updateTotal();
+});
