@@ -1,56 +1,37 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
-  padding: 20px;
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const eventSelect = document.getElementById('event');
+  const ticketInput = document.getElementById('tickets');
+  const totalDisplay = document.getElementById('total');
+  const bookingForm = document.getElementById('bookingForm');
+  const confirmationDiv = document.getElementById('confirmation');
 
-.container {
-  max-width: 400px;
-  background-color: #fff;
-  padding: 30px;
-  margin: 0 auto;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  border-radius: 8px;
-}
+  function updateTotal() {
+    const price = parseFloat(eventSelect.selectedOptions[0].getAttribute('data-price'));
+    const ticketCount = parseInt(ticketInput.value, 10) || 1;
+    totalDisplay.textContent = (price * ticketCount).toFixed(2);
+  }
 
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-}
+  eventSelect.addEventListener('change', updateTotal);
+  ticketInput.addEventListener('input', updateTotal);
 
-label, input, select {
-  display: block;
-  width: 100%;
-  margin-bottom: 15px;
-}
+  bookingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
 
-input, select {
-  padding: 8px;
-  font-size: 16px;
-}
+    const selectedRoute = eventSelect.options[eventSelect.selectedIndex].text;
+    const ticketCount = parseInt(ticketInput.value, 10);
+    const total = totalDisplay.textContent;
 
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-}
+    confirmationDiv.classList.remove('hidden');
+    confirmationDiv.innerHTML = `
+      <h2>Booking Confirmed!</h2>
+      <p>You have booked <strong>${ticketCount}</strong> ticket(s) for <strong>${selectedRoute}</strong>.</p>
+      <p>Total Amount Paid: <strong>₹${total}</strong></p>
+      <p>Thank you for choosing <strong>NR TRAVELS</strong>!</p>
+    `;
 
-button:hover {
-  background-color: #0056b3;
-}
+    bookingForm.reset();
+    updateTotal();
+  });
 
-.hidden {
-  display: none;
-}
-
-#confirmation {
-  margin-top: 20px;
-  padding: 15px;
-  background-color: #d4edda;
-  border-left: 4px solid #28a745;
-  color: #155724;
-}
+  updateTotal();
+});
