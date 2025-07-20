@@ -1,38 +1,44 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const eventSelect = document.getElementById('event');
-  const ticketInput = document.getElementById('tickets');
-  const totalDisplay = document.getElementById('total');
-  const bookingForm = document.getElementById('bookingForm');
-  const confirmationDiv = document.getElementById('confirmation');
+/* General page setup */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  padding: 20px;
+}
 
-  function updateTotal() {
-    const price = parseFloat(eventSelect.selectedOptions[0].getAttribute('data-price'));
-    const ticketCount = parseInt(ticketInput.value, 10) || 1;
-    totalDisplay.textContent = (price * ticketCount).toFixed(2);
+/* Booking card styling */
+.card {
+  max-width: 700px;
+  margin: auto;
+  border-radius: 12px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Title styling */
+.card-title {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+/* Total price display */
+#total {
+  font-weight: bold;
+  color: #0d6efd;
+}
+
+/* Confirmation box */
+#confirmation {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Form spacing and responsiveness */
+@media (max-width: 576px) {
+  .card-title {
+    font-size: 1.5rem;
   }
 
-  eventSelect.addEventListener('change', updateTotal);
-  ticketInput.addEventListener('input', updateTotal);
-
-  bookingForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    const selectedRoute = eventSelect.options[eventSelect.selectedIndex].text;
-    const ticketCount = parseInt(ticketInput.value, 10);
-    const total = totalDisplay.textContent;
-
-    confirmationDiv.classList.remove('d-none');
-    confirmationDiv.innerHTML = `
-      <strong>Booking Confirmed!</strong><br>
-      You booked <strong>${ticketCount}</strong> ticket(s) for <strong>${selectedRoute}</strong>.<br>
-      Total Paid: ₹<strong>${total}</strong><br>
-      Thank you for choosing <strong>NR TRAVELS</strong>!
-    `;
-
-    bookingForm.reset();
-    updateTotal();
-  });
-
-  updateTotal();
-});
-
+  #confirmation {
+    font-size: 0.95rem;
+  }
+}
