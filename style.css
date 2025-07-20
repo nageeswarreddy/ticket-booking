@@ -21,12 +21,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const ticketCount = parseInt(ticketInput.value, 10);
     const total = totalDisplay.textContent;
 
-    confirmationDiv.classList.remove('hidden');
+    confirmationDiv.classList.remove('d-none');
     confirmationDiv.innerHTML = `
-      <h2>Booking Confirmed!</h2>
-      <p>You have booked <strong>${ticketCount}</strong> ticket(s) for <strong>${selectedRoute}</strong>.</p>
-      <p>Total Amount Paid: <strong>₹${total}</strong></p>
-      <p>Thank you for choosing <strong>NR TRAVELS</strong>!</p>
+      <strong>Booking Confirmed!</strong><br>
+      You booked <strong>${ticketCount}</strong> ticket(s) for <strong>${selectedRoute}</strong>.<br>
+      Total Paid: ₹<strong>${total}</strong><br>
+      Thank you for choosing <strong>NR TRAVELS</strong>!
     `;
 
     bookingForm.reset();
@@ -35,3 +35,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   updateTotal();
 });
+
