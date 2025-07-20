@@ -1,30 +1,62 @@
-const eventSelect = document.getElementById('event');
-const ticketInput = document.getElementById('tickets');
-const totalDisplay = document.getElementById('total');
-const form = document.getElementById('bookingForm');
-const confirmation = document.getElementById('confirmation');
-
-function updateTotal() {
-  const price = parseInt(eventSelect.selectedOptions[0].dataset.price);
-  const count = parseInt(ticketInput.value);
-  totalDisplay.textContent = price * count;
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f4f8;
+  margin: 0;
+  padding: 20px;
 }
 
-eventSelect.addEventListener('change', updateTotal);
-ticketInput.addEventListener('input', updateTotal);
+.container {
+  max-width: 500px;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
 
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const eventName = eventSelect.options[eventSelect.selectedIndex].text;
-  const count = ticketInput.value;
-  const total = totalDisplay.textContent;
+h1 {
+  text-align: center;
+  color: #1a73e8;
+}
 
-  confirmation.classList.remove('hidden');
-  confirmation.innerHTML = `<strong>Success!</strong> You booked ${count} ticket(s) for <em>${eventName}</em>. Total cost: <strong>$${total}</strong>.`;
-  
-  form.reset();
-  updateTotal();
-});
+label {
+  font-weight: bold;
+  margin-top: 10px;
+  display: block;
+}
 
-// Initialize total
-updateTotal();
+select,
+input[type="number"] {
+  width: 100%;
+  padding: 8px;
+  margin: 5px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #1a73e8;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button:hover {
+  background-color: #125ac4;
+}
+
+#confirmation {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #e6ffe6;
+  border: 1px solid #88cc88;
+  border-radius: 5px;
+}
+
+.hidden {
+  display: none;
+}
