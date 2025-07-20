@@ -1,27 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Ticket Booking</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NR TRAVELS - Ticket Booking</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Event Ticket Booking</h1>
-    
+    <h1>NR TRAVELS - Ticket Booking</h1>
+
     <form id="bookingForm">
-      <label for="event">Select Event:</label>
+      <label for="event">Select Route:</label>
       <select id="event">
-        <option value="concert" data-price="50">Live Concert - $50</option>
-        <option value="movie" data-price="15">Movie Premiere - $15</option>
-        <option value="theatre" data-price="30">Theatre Play - $30</option>
+        <option value="hyderabad-vijayawada" data-price="449">Hyderabad → Vijayawada - ₹449</option>
+        <option value="tirupati-chennai" data-price="132">Tirupati → Chennai - ₹132</option>
+        <option value="bangalore-anantapur" data-price="269">Bangalore → Anantapur - ₹269</option>
       </select>
 
       <label for="tickets">Number of Tickets:</label>
-      <input type="number" id="tickets" min="1" value="1">
+      <input type="number" id="tickets" min="1" value="1" required />
 
-      <p>Total: $<span id="total">50</span></p>
+      <p>Total: ₹<span id="total">449</span></p>
 
       <button type="submit">Book Now</button>
     </form>
