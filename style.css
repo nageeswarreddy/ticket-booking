@@ -5,26 +5,27 @@ body {
   padding: 20px;
 }
 
-/* ✅ Watermark background image (applies on all screen sizes) */
+/* ✅ Watermark at top right */
 body::before {
   content: "";
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
-  background: url('watermark.png') no-repeat center center;
+  background: url('watermark.png') no-repeat top right;
   background-size: 300px;
-  opacity: 0.05; /* Very light so it looks like a watermark */
+  opacity: 0.05;
   z-index: -1;
 }
 
-/* Booking card styling */
+/* Card style */
 .card {
   max-width: 700px;
   margin: auto;
+  padding: 30px;
+  background: white;
   border-radius: 12px;
-  border: none;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
@@ -32,21 +33,46 @@ body::before {
 .card-title {
   font-weight: 600;
   font-size: 1.8rem;
+  margin-bottom: 20px;
 }
 
-/* Total price display */
+/* Select & Input fields */
+.form-select,
+input[type="number"] {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Button */
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+/* Total display */
 #total {
   font-weight: bold;
   color: #0d6efd;
 }
 
-/* Confirmation box */
+/* Confirmation */
 #confirmation {
+  margin-top: 20px;
   font-size: 1rem;
   line-height: 1.5;
 }
 
-/* Form spacing and responsiveness */
+/* Responsive */
 @media (max-width: 576px) {
   .card-title {
     font-size: 1.5rem;
